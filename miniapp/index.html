@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculator Mini App</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: white;
+      padding: 20px;
+    }
+    input, button {
+      width: 100%;
+      font-size: 18px;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: none;
+    }
+    button {
+      background: #22c55e;
+      color: black;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 15px;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>🧮 Калькулятор</h2>
+
+<input id="expr" placeholder="Например: 2+2*5" />
+<button onclick="calc()">Посчитать</button>
+
+<div class="result" id="result"></div>
+
+<script>
+  const tg = window.Telegram.WebApp;
+  tg.expand();
+
+  function calc() {
+    const expr = document.getElementById("expr").value;
+    try {
+      // ⚠️ только для простого калькулятора
+      const res = Function("return " + expr)();
+      document.getElementById("result").innerText = "Результат: " + res;
+    } catch {
+      document.getElementById("result").innerText = "Ошибка";
+    }
+  }
+</script>
+
+</body>
+</html>
